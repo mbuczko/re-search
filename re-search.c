@@ -52,14 +52,14 @@
 		/* print the subsearch */ \
 		fprintf(stderr, "%s%s", CYAN, saved); \
 		/* print the direction  */ \
-		fprintf(stderr, "%s<%s search> ", search_index > 0 ? GREEN : RED, direction); \
+		fprintf(stderr, "%s %s ", search_index > 0 ? GREEN : RED, direction); \
 		/* print the search buffer */ \
 		fprintf(stderr, "%s%s", CYAN, buffer); \
 		if (index > 0) { \
 			/* save cursor position */ \
 			fprintf(stderr, "\033[s"); \
 			/* if there is a result, append it */ \
-			fprintf(stderr, " (%d)[%s%s%s]", index, NORMAL, result, CYAN); \
+			fprintf(stderr, " [%s%s%s]", NORMAL, result, CYAN); \
 			/* restore cursor position */ \
 			fprintf(stderr, "\033[u"); \
 		}} while (0)
@@ -350,7 +350,7 @@ int main() {
 		fprintf(stderr, "\033[2K\r");
 
 		// print the prompt
-		PROMPT(buffer, saved, (action == SEARCH_BACKWARD ? "backward" : "forward"),
+		PROMPT(buffer, saved, (action == SEARCH_BACKWARD ? "←" : "→"),
 				search_index,
 				search_index > 0 ? history[search_result_index] : "");
 
